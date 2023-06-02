@@ -97,7 +97,7 @@ func (client *S3OssClient) Upload(info WallpaperUploadInfo) error {
 		&s3.PutObjectInput{
 			Bucket: &client.s3Info.Bucket,
 			Key: aws.String(
-				filepath.Join(time.Now().Format("2006-01"), resp.Filename),
+				filepath.Join("bing-wallpaper", time.Now().Format("2006-01"), resp.Filename),
 			),
 			Body: wallpaperRes.Body,
 		},
