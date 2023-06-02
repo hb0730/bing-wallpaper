@@ -12,13 +12,10 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: 1.20
-      - name: Install dependencies
-        run: go get .
       - name: Build
-        run: go build -o bing
+        run: go build -o ./bw/bing ./bw/main.go
       - name: Upload to S3
-        run:
-          ./bing upload --type s3 --index 0 --market zh-CN --resolution 1920
+        run: ./bw/bing upload --type s3 --index 0 --market zh-CN --resolution 1920
         env:
           bucket: ${{ secrets.BUCKET }}
           endpoint: ${{ secrets.ENDPOINT }}
