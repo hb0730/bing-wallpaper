@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
 	"time"
 
 	"github.com/allegro/bigcache/v3"
@@ -111,10 +112,16 @@ func Get(index uint, market, resolution string) (*Response, error) {
 
 	// get image element
 	imgElem := doc.SelectElement("images").SelectElement("image")
+	var filename = ""
+	URL, err := url.Parse(imgElem.SelectElement("url").Text())
+	if err == nil {
+		filename = URL.Query().Get("rf")
+	}
 
 	response := &Response{
 		StartDate:     imgElem.SelectElement("startdate").Text(),
 		EndDate:       imgElem.SelectElement("enddate").Text(),
+		Filename:      filename,
 		URL:           fmt.Sprintf("%s%s_%s", bingURL, imgElem.SelectElement("urlBase").Text(), Resolution[resolution]),
 		Copyright:     imgElem.SelectElement("copyright").Text(),
 		CopyrightLink: imgElem.SelectElement("copyrightlink").Text(),

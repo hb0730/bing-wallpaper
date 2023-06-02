@@ -85,3 +85,7 @@ func RootHandler(c *gin.Context) {
 	// render response as JSON
 	c.JSON(http.StatusOK, response)
 }
+
+// DownloadHandler download image
+func DownloadHandler(c *gin.Context) {
+}

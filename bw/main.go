@@ -27,6 +27,7 @@ func init() {
 
 	rootCmd.AddCommand(
 		run.Cmd,
+		run.UploadCmd,
 	)
 }
 

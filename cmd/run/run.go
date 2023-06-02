@@ -39,6 +39,7 @@ func run(cmd *cobra.Command, args []string) {
 
 	router.Use(CORSMiddleware())
 	router.GET("/", handler.RootHandler)
+	router.GET("/download", handler.DownloadHandler)
 
 	if err := router.Run(":9000"); err != nil {
 		log.Fatal(err)
