@@ -17,7 +17,7 @@ import (
 // S3Info S3 OSS properties
 type S3Info struct {
 	Bucket       string
-	Regin        string
+	Region       string
 	protocol     string
 	endpoint     string
 	accessKey    string
@@ -27,15 +27,15 @@ type S3Info struct {
 func readEnv() (S3Info, error) {
 	protocol, err := getEnv("protocol", "https")
 	bucket, err := getEnv("bucket", "")
-	regin, err := getEnv("regin", "Auto")
+	region, err := getEnv("region", "Auto")
 	endpoint, err := getEnv("endpoint", "")
 	endpoint = strings.TrimLeft(endpoint, "https://")
 	endpoint = strings.TrimLeft(endpoint, "http://")
-	accessKey, err := getEnv("accessKey", "")
-	accessSecret, err := getEnv("accessKeySecret", "")
+	accessKey, err := getEnv("access_key", "")
+	accessSecret, err := getEnv("access_key_secret", "")
 	return S3Info{
 		Bucket:       bucket,
-		Regin:        regin,
+		Region:       region,
 		protocol:     protocol,
 		endpoint:     endpoint,
 		accessKey:    accessKey,
@@ -55,7 +55,7 @@ func getEnv(key, value string) (string, error) {
 func newS3Client(info S3Info) (*s3.Client, error) {
 	return s3.New(
 		s3.Options{
-			Region:           info.Regin,
+			Region:           info.Region,
 			Credentials:      aws.NewCredentialsCache(credentials.NewStaticCredentialsProvider(info.accessKey, info.accessSecret, "")),
 			EndpointResolver: s3.EndpointResolverFromURL(info.protocol + "://" + info.endpoint),
 		},

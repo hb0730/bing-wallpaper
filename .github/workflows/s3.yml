@@ -24,16 +24,8 @@ jobs:
         run:
           ./bing upload --type s3 --index 0 --market zh-CN --resolution 1920
         env:
-          bucket: ${{ secrets.S3_BUCKET }}
+          bucket: ${{ secrets.BUCKET }}
+          endpoint: ${{ secrets.ENDPOINT }}
           access_key: ${{ secrets.ACCESS_KEY }}
-          access_key_secret: ${{ secrets.SECRET_ACCESS_KEY }}
-          region: ${{ secrets.REGION }}
-      - name: Upload to AWS S3
-        uses: jakejarvis/s3-sync-action@master
-        with:
-          args: --acl public-read --follow-symlinks --delete
-        env:
-          bucket: ${{ secrets.S3_BUCKET }}
-          access_key: ${{ secrets.ACCESS_KEY }}
-          access_key_secret: ${{ secrets.SECRET_ACCESS_KEY }}
+          access_key_secret: ${{ secrets.ACCESS_KEY_SECRET }}
           region: ${{ secrets.REGION }}
