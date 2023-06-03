@@ -115,7 +115,7 @@ func Get(index uint, market, resolution string) (*Response, error) {
 	var filename = ""
 	URL, err := url.Parse(imgElem.SelectElement("url").Text())
 	if err == nil {
-		filename = URL.Query().Get("rf")
+		filename = URL.Query().Get("id")
 	}
 
 	response := &Response{
