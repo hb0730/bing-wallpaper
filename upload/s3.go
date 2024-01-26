@@ -47,17 +47,20 @@ func getEnv(key, value string) (string, error) {
 	if s {
 		return v, nil
 	}
-	if value != "" {
+	if value != "" && len(value) > 0 {
 		return value, nil
 	}
 	return "", errors.New("env not found")
 }
 func newS3Client(info S3Info) (*s3.Client, error) {
+	// create a new S3 client
 	return s3.New(
 		s3.Options{
-			Region:           info.Region,
-			Credentials:      aws.NewCredentialsCache(credentials.NewStaticCredentialsProvider(info.accessKey, info.accessSecret, "")),
-			EndpointResolver: s3.EndpointResolverFromURL(info.protocol + "://" + info.endpoint),
+			Region: info.Region,
+			Credentials: aws.NewCredentialsCache(
+				credentials.NewStaticCredentialsProvider(info.accessKey, info.accessSecret, ""),
+			),
+			BaseEndpoint: aws.String(info.protocol + "://" + info.endpoint),
 		},
 	), nil
 }
