@@ -2,7 +2,6 @@ package upload
 
 import (
 	"context"
-	"errors"
 	"github.com/TimothyYe/bing-wallpaper"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/credentials"
@@ -43,14 +42,14 @@ func readEnv() (S3Info, error) {
 	}, err
 }
 func getEnv(key, value string) (string, error) {
-	v, s := os.LookupEnv(key)
-	if s {
-		return v, nil
+	_value, s := os.LookupEnv(key)
+	if s && _value != "" && len(_value) > 0 {
+		return _value, nil
 	}
 	if value != "" && len(value) > 0 {
 		return value, nil
 	}
-	return "", errors.New("env not found")
+	return "", nil
 }
 func newS3Client(info S3Info) (*s3.Client, error) {
 	// create a new S3 client
