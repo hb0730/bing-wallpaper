@@ -10,7 +10,7 @@ require (
 	github.com/beevik/etree v1.1.0
 	github.com/gin-gonic/gin v1.9.1
 	github.com/spf13/cobra v1.3.0
-	github.com/stretchr/testify v1.8.3
+	github.com/stretchr/testify v1.9.0
 )
 
 require (
