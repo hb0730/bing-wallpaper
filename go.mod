@@ -1,13 +1,15 @@
 module github.com/TimothyYe/bing-wallpaper
 
-go 1.20
+go 1.21.0
+
+toolchain go1.23.1
 
 require (
 	github.com/allegro/bigcache/v3 v3.1.0
 	github.com/aws/aws-sdk-go-v2 v1.24.1
 	github.com/aws/aws-sdk-go-v2/credentials v1.16.16
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.48.1
-	github.com/beevik/etree v1.1.0
+	github.com/beevik/etree v1.4.1
 	github.com/gin-gonic/gin v1.9.1
 	github.com/spf13/cobra v1.3.0
 	github.com/stretchr/testify v1.8.3
